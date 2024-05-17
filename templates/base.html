@@ -1,0 +1,20 @@
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}User Management System{% endblock %}</title>
+    <!-- Load Bootstrap CSS -->
+    {% bootstrap_css %}
+    <!-- Custom CSS -->
+    <!-- if need i will add one -->
+</head>
+<body>
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+<!-- Load Bootstrap JS -->
+{% bootstrap_javascript %}
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Users</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Avatar</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Bio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users_with_avatars %}
+                <tr
+                {% if user == request.user %}
+                        class="bg-success"
+                    {% endif %}
+                >
+                    <td>
+                        {% if user.avatar %}
+                            <img src="{{ user.avatar.url }}" alt="{{ user.username }}'s avatar" class="img-thumbnail" width="50" height="50">
+                        {% else %}
+                            No avatar
+                        {% endif %}
+                    </td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.bio }}</td>
+                    
+                    {% if user == request.user %}
+                        <td><a href="{% url 'profile' %}">Edit Profile</a></td>
+                    {% endif %}
+                        
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
