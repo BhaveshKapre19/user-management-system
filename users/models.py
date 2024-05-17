@@ -10,7 +10,7 @@ def user_directory_path(instance, filename):
     # Generate the filename
     unique_filename = f'{uuid.uuid4()}.{filename.split(".")[-1]}'
     # Return the path to upload the file
-    return os.path.join(STATICFILES_DIRS[0],'images', instance.username, 'avatars', filename)
+    return os.path.join(STATICFILES_DIRS[0],'images', instance.username, 'avatars', unique_filename)
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
@@ -22,6 +22,14 @@ class CustomUser(AbstractUser):
 
     def __str__(self) -> str:
         return self.first_name + " " + self.last_name
+    
+    def delete(self, *args, **kwargs):
+        # Delete user's avatar file if it exists
+        if self.avatar:
+            if os.path.isfile(self.avatar.path):
+                os.remove(self.avatar.path)
+        # Call parent class delete method
+        super().delete(*args, **kwargs)
 
 
     

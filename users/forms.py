@@ -3,6 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .models import CustomUser
 
 class CustomUserCreationForm(UserCreationForm):
+    avatar = forms.FileField(required=False)
     class Meta(UserCreationForm.Meta):
         model = CustomUser
         fields = ('username', 'email', 'password1', 'password2', 'bio', 'avatar')

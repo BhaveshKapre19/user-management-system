@@ -5,79 +5,70 @@
 {% block content %}
 <div class="container">
 
-              <!-- Create New User -->   
-              <div class="main-content mt-5">
-
-                <div class="card bg-white">
-                    <div class="card-body mt-5 mb-5">
-                        
-                        <div class="row">
-                            
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <div class="col-md-4">Name</div>
-                                    <div class="col-md-8">
-                                        {{ user.username }}
-    
-                                     </div>
-                                </div>
-    
-                                <div class="form-group row">
-                                    <div class="col-md-4">Email</div>
-                                    <div class="col-md-8">
-                                        {{ user.email }}
-                                     </div>
-                                </div>
-    
-                                <div class="form-group row">
-                                    <div class="col-md-4">Bio</div>
-                                    <div class="col-md-8">
-                                        {{ user.bio }}
-                                     </div>
-                                </div>
-    
-                                <div class="form-group row">
-                                    <div class="col-md-4">Created</div>
-                                    <div class="col-md-8">
-                                        
-                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Role</div>
-                                    <div class="col-md-8">
-                                      <span class="badge badge-lg badge-secondary text-white"></span>
-                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Status</div>
-                                    <div class="col-md-8">
-                                       <span class="badge badge-lg badge-success text-white"></span>
-                                     </div>
-                                </div>
-    
-                            </div>
-                            <div class="col-md-6">
-                                <div class="user-thumb">
-                                    <img id="profile-photo" src="{{ user.avatar.url }}" alt="{{ user.username }}'s avatar" class="img-thumbnail">
-                                </div>
-    
-                            </div>
-                            <div class="col-md-6">
-                                <div class="">
-                                    <a href="{% url 'profile_edit' %}" class="btn btn-danger">Edit</a>
-                                    <button type="button" class="btn btn-warning">Delete</button>
-                                </div>
-    
+    <!-- Profile Info -->   
+    <div class="main-content mt-5">
+        <div class="card bg-white">
+            <div class="card-body mt-5 mb-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <div class="col-md-4">Name</div>
+                            <div class="col-md-8">{{ user.username }}</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4">Email</div>
+                            <div class="col-md-8">{{ user.email }}</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4">Bio</div>
+                            <div class="col-md-8">{{ user.bio }}</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4">Date Joined</div>
+                            <div class="col-md-8">{{ user.date_joined }}</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4">Active</div>
+                            <div class="col-md-8">
+                                {% if user.is_active %}
+                                    <span class="text-success">Active</span>
+                                {% else %}
+                                    <span class="text-danger">Inactive</span>
+                                {% endif %}
                             </div>
                         </div>
-    
+                        <div class="form-group row">
+                            <div class="col-md-4">Is Staff</div>
+                            <div class="col-md-8">
+                                {% if user.is_staff %}
+                                    <span class="text-success">Staff</span>
+                                {% else %}
+                                    <span class="text-danger">Not Staff</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="user-thumb">
+                            {% if user.avatar %}
+                                <img id="profile-photo" src="{{ user.avatar.url }}" alt="{{ user.username }}'s avatar" class="img-thumbnail">
+                            {% else %}
+                                <p>No avatar available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="">
+                            <a href="{% url 'profile_edit' %}" class="btn btn-danger">Edit</a>
+                            <a href="{% url 'profile_delete' %}" class="btn btn-warning">Delete</a>
+                        </div>
                     </div>
                 </div>
             </div>
-             <!-- Create New User-->   
+        </div>
+    </div>
+    <!-- Profile Info -->   
 
 </div>
-
-
-
 {% endblock %}
+
